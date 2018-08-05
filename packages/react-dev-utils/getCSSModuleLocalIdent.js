@@ -7,7 +7,7 @@
 
 'use strict';
 
-const loaderUtils = require('loader-utils');
+const loaderUtils = require('../../../../../../Library/Caches/typescript/2.9/node_modules/@types/loader-utils');
 
 module.exports = function getLocalIdent(
   context,

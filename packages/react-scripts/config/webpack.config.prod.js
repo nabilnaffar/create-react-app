@@ -8,19 +8,19 @@
 // @remove-on-eject-end
 'use strict';
 
-const autoprefixer = require('autoprefixer');
+const autoprefixer = require('../../../../../../../Library/Caches/typescript/2.9/node_modules/@types/autoprefixer');
 const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const eslintFormatter = require('react-dev-utils/eslintFormatter');
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
+const webpack = require('../../../../../../../Library/Caches/typescript/2.9/node_modules/@types/webpack');
+const HtmlWebpackPlugin = require('../../../../../../../Library/Caches/typescript/2.9/node_modules/@types/html-webpack-plugin');
+const UglifyJsPlugin = require('../../../../../../../Library/Caches/typescript/2.9/node_modules/@types/uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('../../../../../../../Library/Caches/typescript/2.9/node_modules/@types/mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('../../../../../../../Library/Caches/typescript/2.9/node_modules/@types/optimize-css-assets-webpack-plugin');
+const ManifestPlugin = require('../../../../../../../Library/Caches/typescript/2.9/node_modules/@types/webpack-manifest-plugin');
+const InterpolateHtmlPlugin = require('../../react-dev-utils/InterpolateHtmlPlugin');
+const SWPrecacheWebpackPlugin = require('../../../../../../../Library/Caches/typescript/2.9/node_modules/@types/sw-precache-webpack-plugin');
+const eslintFormatter = require('../../react-dev-utils/eslintFormatter');
+const ModuleScopePlugin = require('../../react-dev-utils/ModuleScopePlugin');
+const getCSSModuleLocalIdent = require('../../react-dev-utils/getCSSModuleLocalIdent');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 
@@ -213,29 +213,35 @@ module.exports = {
 
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
+      // {
+      //   test: /\.(js|jsx|mjs)$/,
+      //   enforce: 'pre',
+      //   use: [
+      //     {
+      //       options: {
+      //         formatter: eslintFormatter,
+      //         eslintPath: require.resolve('eslint'),
+      //         // TODO: consider separate config for production,
+      //         // e.g. to enable no-console and no-debugger only in production.
+      //         baseConfig: {
+      //           extends: [require.resolve('eslint-config-react-app')],
+      //         },
+      //         // @remove-on-eject-begin
+      //         ignore: false,
+      //         useEslintrc: false,
+      //         // @remove-on-eject-end
+      //       },
+      //       loader: require.resolve('eslint-loader'),
+      //     },
+      //   ],
+      //   include: paths.srcPaths,
+      //   exclude: [/[/\\\\]node_modules[/\\\\]/],
+      // },
       {
-        test: /\.(js|jsx|mjs)$/,
+        test: /\.(ts|tsx)$/,
+        loader: require.resolve('tslint-loader'),
         enforce: 'pre',
-        use: [
-          {
-            options: {
-              formatter: eslintFormatter,
-              eslintPath: require.resolve('eslint'),
-              // TODO: consider separate config for production,
-              // e.g. to enable no-console and no-debugger only in production.
-              baseConfig: {
-                extends: [require.resolve('eslint-config-react-app')],
-              },
-              // @remove-on-eject-begin
-              ignore: false,
-              useEslintrc: false,
-              // @remove-on-eject-end
-            },
-            loader: require.resolve('eslint-loader'),
-          },
-        ],
-        include: paths.srcPaths,
-        exclude: [/[/\\\\]node_modules[/\\\\]/],
+        include: paths.appSrc,
       },
       {
         // "oneOf" will traverse all following loaders until one will
@@ -251,6 +257,11 @@ module.exports = {
               limit: 10000,
               name: 'static/media/[name].[hash:8].[ext]',
             },
+          },
+          {
+            test: /\.(ts|tsx)$/,
+            include: paths.appSrc,
+            loader: require.resolve('ts-loader'),
           },
           // Process application JS with Babel.
           // The preset includes JSX, Flow, and some ESnext features.

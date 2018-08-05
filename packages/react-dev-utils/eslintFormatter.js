@@ -8,8 +8,8 @@
 'use strict';
 
 const chalk = require('chalk');
-const stripAnsi = require('strip-ansi');
-const table = require('text-table');
+const stripAnsi = require('../../../../../../Library/Caches/typescript/2.9/node_modules/@types/strip-ansi');
+const table = require('../../../../../../Library/Caches/typescript/2.9/node_modules/@types/text-table');
 
 function isError(message) {
   if (message.fatal || message.severity === 2) {

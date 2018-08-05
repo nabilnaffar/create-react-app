@@ -1,0 +1,17 @@
+{
+    "extends": ["tslint:recommended", "tslint-react"],
+    "rules": {
+      "quotemark": [true, "single", "jsx-double"],
+      "member-access": [true, "no-public"],
+      "ordered-imports": false,
+      "object-literal-key-quotes": [true, "as-needed"],
+      "interface-name": false,
+      "no-empty-interface":false,
+      "no-console":false,
+      "jsx-no-multiline-js":false,
+      "no-any": true,
+      "no-var-requires": true,
+      "max-line-length": true,
+      "deprecation": true
+    }
+}
